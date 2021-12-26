@@ -12,7 +12,7 @@ preprocess_chatlog <- function(chatlog,min_words=1000,first_names_only=TRUE){
   ##messages (tbl): contains all messages with their time, text, author and emoji
   ##words (tbl): contains all word/author combinations with their number of occurences
   
-  if(class(chatlog)=="character"){chatlog <- rwa_read(chatlog)}
+  if(class(chatlog)=="character"){chatlog <- rwa_read(chatlog,format="MM/dd/yy, HH:mm")}
   
   messages <- chatlog %>% 
     select(!"source") %>% 
