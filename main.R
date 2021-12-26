@@ -32,4 +32,3 @@ names(colors)=c(
 
 ####Set colors
 
-#nb: actiefste en minst actieve dagen
