@@ -32,5 +32,3 @@ visualize_wordcloud <- function(tf_icf){
 wordclouds <- visualize_wordcloud(tf_icf)
 
 random_order <- sample(authors)
-
-wordclouds[random_order]
