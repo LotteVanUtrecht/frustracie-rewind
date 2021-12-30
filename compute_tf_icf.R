@@ -18,7 +18,7 @@ compute_tf_icf <- function(words, users){
     rename(n_author = total_words) %>% 
     mutate(tf=n/n_author) %>% 
     mutate(tf_complement=(n_word-n+1)/(n_total-n_author+1)) %>% 
-    mutate(tf_icf=log(tf/tf_complement)) %>% #take the log, because the bar plots will look nicer
+    mutate(tf_icf=tf/tf_complement) %>% #alternatively, take the log, because the bar plots will look nicer
     select(c(author,word,n,tf_icf)) %>% 
     arrange(desc(tf_icf))
 

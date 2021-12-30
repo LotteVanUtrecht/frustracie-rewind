@@ -5,6 +5,7 @@ library("tidytext")
 library("scales")
 library("RColorBrewer")
 library("lubridate")
+library("wordcloud2")
 
 
 ####Import data
