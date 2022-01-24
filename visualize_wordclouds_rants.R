@@ -33,6 +33,8 @@ visualize_wordcloud_rants <- function(data){
   
   for (person in data[["users"]]$author){
     
+    n_total <- data[["users"]] %>% filter(author==person) %>% pull(total_words)
+    
     tf_icf <- words %>% 
       filter(author==person) %>% 
       left_join(data[["words"]] %>% filter(author==person) %>% rename(n_word=n)) %>% 
