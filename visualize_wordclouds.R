@@ -5,30 +5,20 @@ visualize_wordcloud <- function(tf_icf){
   wordclouds <- list()
 
   for (person in authors){
-    
-    if (person %in% c("Jesse","Nora","Bente","Orfeas","Sanne")){
-    
       wordclouds[[person]] <- tf_icf %>% 
-          filter((author==person)&n>2&tf_icf>2) %>%
-          select(word,tf_icf) %>% 
-          mutate(tf_icf=log(tf_icf)) %>% 
-          head(100) %>% 
-          wordcloud2(color="random-light",size=.60,minSize="FrustraCie rewind: Iemands meest typische FrustraCie woorden")
-    }
-    else {
-      wordclouds[[person]] <- tf_icf %>% 
-        filter(author==person&n>3&tf_icf>2) %>%
+        filter(author==person&n>3&tf_icf>2) %>% 
+        filter(!pmap(list(author,word,T),grepl) %>% unlist()) %>%
         select(word,tf_icf) %>% 
         mutate(tf_icf=log(tf_icf)) %>% 
         head(100) %>% 
-        wordcloud2(color="random-dark",size=.60)
-    }
-      
+        wordcloud2(color="random-dark",size=.25,shape="star",minSize = "Jouw tekst hier?")
+ 
   }
   
   return(wordclouds)
 }
 
+tf_icf <- compute_tf_icf(data[["words"]],data[["users"]])
 wordclouds <- visualize_wordcloud(tf_icf)
 
 random_order <- sample(authors)

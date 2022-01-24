@@ -12,16 +12,15 @@ preprocess_chatlog <- function(chatlog,min_words=1000,first_names_only=TRUE){
   ##messages (tbl): contains all messages with their time, text, author and emoji
   ##words (tbl): contains all word/author combinations with their number of occurences
   
-  if(class(chatlog)=="character"){chatlog <- rwa_read(chatlog,format="MM/dd/yy, HH:mm")}
+  if(class(chatlog)=="character"){chatlog <- rwa_read(chatlog,format="dd-MM-yy, HH:mm:ss")}
   
   messages <- chatlog %>% 
     select(!"source") %>% 
     filter(!(text %in% c("<Media omitted>","You deleted this message","This message was deleted"))) %>% 
-    filter(!author %in% c("Anne M AEGEE","Dominique AEGEE","Floor AEGEE","Tess AEGEE")) %>% 
     droplevels() %>% 
     drop_na(author) #removes messages like "you are now an admin of this group"
   
-  if(first_names_only==TRUE){levels(messages$author) <- str_remove_all(levels(messages$author),"[:blank:](\\w)*")}
+  if(first_names_only==TRUE){levels(messages$author) <- str_remove_all(levels(messages$author),"(?s) .*")}
   
   words <- messages %>% 
     unnest_tokens(word, text) %>%
