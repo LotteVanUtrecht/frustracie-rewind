@@ -12,7 +12,7 @@ library("wordcloud2")
 source("1_data_import.R")
 
 
-data <- preprocess_chatlog("Data/combined_2021.txt",min_words=700)
+data <- preprocess_chatlog("Data/combined_2022.txt",min_words=700)
 
 
 ####Set colors

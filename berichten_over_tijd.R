@@ -37,22 +37,9 @@ create_time_summary <- function(data,colors=colors){
     scale_x_continuous(breaks=1:12,
                      labels=c("jan","feb","mar","apr","mei","jun","jul","aug","sep","okt","nov","dec")) +
     facet_wrap(vars(author)) +
-    labs(title = "Frustracie Rewind 2021: Wie was actief in welke maanden?",x=NULL,y = NULL) +
+    labs(title = "Frustracie Rewind 2022: Wie was actief in welke maanden?",x=NULL,y = NULL) +
     theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
   
-  plot_months_2 <- messages_per_month %>% 
-    filter(!(author %in% sorting_order_month[1:16])) %>% 
-    ggplot(aes(x=month,y=n,fill=author)) +
-    geom_col(show.legend = FALSE)  +
-    theme_classic() +
-    scale_fill_manual(values=colors) +
-    scale_y_continuous(breaks=NULL,labels=NULL) +
-    scale_x_continuous(breaks=1:12,
-                       labels=c("jan","feb","mar","apr","mei","jun","jul","aug","sep","okt","nov","dec")) +
-    facet_wrap(vars(author)) +
-    labs(title = "Frustracie Rewind 2021: Wie was actief in welke maanden?",x=NULL,y = NULL) +
-    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
-
   messages_per_hour <- time_messages %>% 
     group_by(author,hour) %>% 
     summarise(n=n()) %>% 
@@ -70,7 +57,6 @@ create_time_summary <- function(data,colors=colors){
   }
   
   plot_hours <- messages_per_hour %>% 
-    filter(author!="Nora") %>% 
     ggplot(aes(x=hour,y=n,fill=author)) +
     geom_col(show.legend = FALSE)  +
     theme_classic() +
@@ -83,9 +69,9 @@ create_time_summary <- function(data,colors=colors){
     geom_vline(xintercept=23.5,linetype="dotted") +
     scale_x_continuous(breaks=seq(2.5,20.5,6),
                        labels=c("Nacht","Ochtend","Middag","Avond")) +
-    facet_wrap(vars(author),ncol=3) +
-    labs(title = "Frustracie Rewind 2021: Wie spamt wanneer?",x=NULL,y = NULL)
+    facet_wrap(vars(author),ncol=4) +
+    labs(title = "Frustracie Rewind 2022: Wie spamt wanneer?",x=NULL,y = NULL)
   
-  return(list(plot_months_1,plot_months_2,plot_hours))
+  return(list(plot_months_1,plot_hours))
   
   }

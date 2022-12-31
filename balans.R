@@ -4,7 +4,7 @@ users <- data[["users"]] %>%
   select(-total_words) %>% 
   mutate(
     Gender=ifelse(
-    author %in% c("Boris","Cas","Jeroen","Jesse","Jippe","Niem","Orfeas","Paco","Parcifal","Reinout"),
+    author %in% c("Boris","Cas","Jeroen","Niem","Orfeas","Reinout"),
     "Man","Vrouw") %>% as.factor(),
     Pangea=ifelse(
     author %in% c("Boris","Cas","Dagmar","Danee","Demi","Niem","Paco","Parcifal","Reinout","Rosanne","Sanne"),
@@ -13,7 +13,7 @@ users <- data[["users"]] %>%
     author %in% c("Cas","Dagmar","Lotte","Maud","Nora","Parcifal","Reinout","Rosanne"),
     "Werkend","Studerend") %>% as.factor(),
     Relatiestatus=ifelse(
-    author %in% c("Cas","Dagmar","Demi","Maud","Myrthe","Nora","Paco","Rosanne"),
+    author %in% c("Boris","Cas","Danee","Demi","Maud","Myrthe","Rosanne","Sanne"),
     "Relatie","Single") %>% as.factor())
 
 #verzamel categorieën over dag
@@ -48,7 +48,7 @@ messages$categorie %>% relevel()
 messages %>%
   ggplot(aes(x = time,y=nweek,fill=value)) +
   geom_area() +
-  labs(title="Frustracie Rewind 2021: Balans in de FrustraCie",caption="Data tussen 4 en 17 augustus ontbreekt en is geïntrapoleerd",x=NULL,y=NULL) +
+  labs(title="Frustracie Rewind 2022: Balans in de FrustraCie",caption="Data tussen 1 en 10 januari ontbreekt en is geïntrapoleerd",x=NULL,y=NULL) +
   facet_wrap(~categorie,labeller = as_labeller(c("Burger"="Luie burgers of eeuwige studenten?",
                                                  "Gender"="Gedomineerd door vrouwen of mannen?",
                                                  "Pangea"="Pangeaparty of goede afspiegeling van AEGEE?",

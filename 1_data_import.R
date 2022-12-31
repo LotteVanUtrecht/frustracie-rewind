@@ -17,7 +17,7 @@ preprocess_chatlog <- function(chatlog,min_words=1000,first_names_only=TRUE){
   messages <- chatlog %>% 
     select(!"source") %>% 
     filter(!(text %in% c("<Media omitted>","You deleted this message","This message was deleted"))) %>% 
-    filter(!author %in% c("Anne M AEGEE","Dominique AEGEE","Floor AEGEE","Tess AEGEE")) %>% 
+    filter(!author %in% c("Bente AEGEE","Paco AEGEE","Jippe AEGEE")) %>% 
     droplevels() %>% 
     drop_na(author) #removes messages like "you are now an admin of this group"
   
